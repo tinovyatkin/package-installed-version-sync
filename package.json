@@ -6,6 +6,9 @@
   "scripts": {
     "test": "jest"
   },
+  "engines": {
+    "node": ">=6"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tinovyatkin/package-installed-version-sync.git"
@@ -59,7 +62,14 @@
       "sourceType": "script"
     },
     "rules": {
-      "prefer-object-spread/prefer-object-spread": "off"
+      "prefer-object-spread/prefer-object-spread": "off",
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true,
+          "trailingComma": "es5"
+        }
+      ]
     }
   }
 }
