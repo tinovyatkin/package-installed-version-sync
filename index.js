@@ -1,6 +1,7 @@
 'use strict';
 
 const { execFileSync } = require('child_process');
+const { resolve } = require('path');
 
 const cache = new Map();
 
@@ -18,7 +19,7 @@ function getPackageInstalledVersion(packageName) {
   try {
     // execute NPM ls with JSON output
     const execRes = execFileSync('npm', ['-j', 'ls', packageName], {
-      cwd: __dirname,
+      cwd: resolve('..', module.paths[0]),
       encoding: 'utf8',
       timeout: 4000,
     });
