@@ -32,7 +32,6 @@ function getPackageInstalledVersion(packageName) {
     if (version) cache.set(packageName, version);
     return version;
   } catch (err) {
-    console.error(err);
     throw new ReferenceError(
       `Unable to get installed version of "${packageName}"`
     );
