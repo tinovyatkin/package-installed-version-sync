@@ -23,7 +23,7 @@ function getPackageInstalledVersion(packageName) {
         ? resolve(__dirname, '../../')
         : __dirname,
       encoding: 'utf8',
-      timeout: 4000,
+      timeout: 40000,
     });
 
     const { dependencies: { [packageName]: { version } } } = JSON.parse(
