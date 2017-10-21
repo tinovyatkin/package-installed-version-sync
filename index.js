@@ -20,7 +20,7 @@ function getPackageInstalledVersion(packageName) {
     // execute NPM ls with JSON output
     const execRes = execFileSync('npm', ['-j', 'ls', packageName], {
       cwd: __dirname.includes('node_modules')
-        ? resolve('../..', __dirname)
+        ? resolve(__dirname, '../../')
         : __dirname,
       encoding: 'utf8',
       timeout: 4000,
