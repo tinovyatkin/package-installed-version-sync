@@ -7,8 +7,11 @@
     "test": "jest"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=7"
   },
+  "files": [
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tinovyatkin/package-installed-version-sync.git"
@@ -71,5 +74,8 @@
         }
       ]
     }
+  },
+  "dependencies": {
+    "@yarnpkg/lockfile": "^1.0.0"
   }
 }
