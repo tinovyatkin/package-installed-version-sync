@@ -25,4 +25,8 @@ describe('Getting package installed version', () => {
       ReferenceError
     );
   });
+
+  test('Github installed package', () => {
+    expect(getPackageInstalledVersionSync('browser-logos')).toBe('43.1.0');
+  });
 });

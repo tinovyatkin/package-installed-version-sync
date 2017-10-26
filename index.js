@@ -6,6 +6,7 @@ const { execFileSync } = require('child_process');
 const { existsSync, statSync, readFileSync } = require('fs');
 const path = require('path');
 const yarnLockfile = require('@yarnpkg/lockfile');
+const { valid } = require('semver');
 
 const cache = new Map();
 let checkedLockfiles = false;
@@ -55,7 +56,7 @@ function readAndParseYarnLock(yarnLockFilepath) {
           parsedYarnLock.object
         )) {
           const [, packageName] = /^(\S+)@[^@]+$/.exec(key);
-          cache.set(packageName, version);
+          if (valid(version)) cache.set(packageName, version);
         }
       }
     }
@@ -84,7 +85,7 @@ function readAndParsePackageLock(filepath) {
     },
   */
   for (const [packageName, { version }] of Object.entries(dependencies)) {
-    cache.set(packageName, version);
+    if (valid(version)) cache.set(packageName, version);
   }
 }
 
