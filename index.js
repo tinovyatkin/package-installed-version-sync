@@ -13,16 +13,21 @@ let checkedLockfiles = false;
 function searchFileSync(dirToStart, fileToSearch) {
   try {
     let curDir = dirToStart;
+    let deep = 0;
     do {
+      // console.log(curDir);
       const filePath = path.join(curDir, fileToSearch);
       if (existsSync(filePath)) return filePath;
       curDir = path.resolve(curDir, '..');
-    } while (statSync(curDir).isDirectory());
-  } catch (e) {} // eslint-disable-line no-empty
+    } while (curDir.length > 1 && statSync(curDir).isDirectory() && ++deep < 6);
+  } catch (e) {
+    // console.error(e);
+  } // eslint-disable-line no-empty
   return undefined;
 }
 
 function readAndParseYarnLock(yarnLockFilepath) {
+  // console.info('Parsing yarn.lock');
   try {
     const file = readFileSync(yarnLockFilepath, 'utf8');
     const parsedYarnLock = yarnLockfile.parse(file);
@@ -58,6 +63,7 @@ function readAndParseYarnLock(yarnLockFilepath) {
 }
 
 function readAndParsePackageLock(filepath) {
+  // console.info('Parsing package-lock.json');
   const { dependencies } = require(filepath); // eslint-disable-line global-require, import/no-dynamic-require
   /*
       "@destinationstransfers/eslint-config": {
@@ -93,7 +99,7 @@ function searchLockfiles() {
       if (pl) readAndParsePackageLock(pl);
     }
   } catch (err) {
-    // console.error(err);
+    console.error(err);
   }
 }
 
