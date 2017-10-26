@@ -14,4 +14,5 @@ const jestVersion = packageInstalledVersionSync('jest'); // => 21.0.1
 
 # Changelog
 
+-   2.0.2 - fixed error with NPM installed packages from GitHub repos
 -   2.0 - now uses lockfiles (`yarn.lock` or `package-lock.json`) when available for faster result and compatibility with Yarn.
