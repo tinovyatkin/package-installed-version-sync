@@ -1,6 +1,6 @@
 {
   "name": "package-installed-version-sync",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Synchronously returns installed version of a dependency package",
   "main": "index.js",
   "scripts": {
