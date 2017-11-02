@@ -22,7 +22,7 @@ function searchFileSync(dirToStart, fileToSearch) {
       curDir = path.resolve(curDir, '..');
     } while (curDir.length > 1 && statSync(curDir).isDirectory() && ++deep < 6);
   } catch (e) {
-    console.error(e);
+    // console.error(e);
   } // eslint-disable-line no-empty
   return undefined;
 }
