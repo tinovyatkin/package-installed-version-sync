@@ -8,9 +8,10 @@ const { searchFileSync } = getPackageInstalledVersionSync;
 
 describe('Getting package installed version', () => {
   test('searchFileSync', () => {
+    // searching ourselves
     const deepDir = path.resolve(__dirname, '__tests__', 'test-deep-folder');
-    const res = searchFileSync(deepDir, 'package.json');
-    expect(res).toBe(path.resolve(__dirname, 'package.json'));
+    const res = searchFileSync(deepDir, path.basename(__filename));
+    expect(res).toBe(__filename);
     // should faild well on unknown file
     expect(searchFileSync(deepDir, 'byaka.buka')).toBeUndefined();
   });
