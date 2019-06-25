@@ -33,7 +33,7 @@
     "browser-logos": "github:alrra/browser-logos#51.0.17",
     "eslint": "5.16.0",
     "eslint-plugin-import": "2.18.0",
-    "eslint-plugin-node": "5.2.1",
+    "eslint-plugin-node": "9.1.0",
     "jest": "24.8.0",
     "remark-cli": "6.0.1",
     "remark-preset-lint-consistent": "2.0.1",
