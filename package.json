@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/tinovyatkin/package-installed-version-sync#readme",
   "devDependencies": {
-    "@destinationstransfers/eslint-config": "6.4.2",
+    "@destinationstransfers/eslint-config": "7.0.8",
     "browser-logos": "github:alrra/browser-logos#56.2.0",
     "eslint": "5.16.0",
     "eslint-plugin-import": "2.18.0",
