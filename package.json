@@ -4,10 +4,11 @@
   "description": "Synchronously returns installed version of a dependency package",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint \"**/*.js\" --ignore-path .gitignore"
   },
   "engines": {
-    "node": ">=7"
+    "node": ">=8"
   },
   "files": [
     "index.js"
@@ -18,6 +19,7 @@
   },
   "keywords": [
     "npm",
+    "yarn",
     "package",
     "version",
     "sync"
@@ -29,55 +31,41 @@
   },
   "homepage": "https://github.com/tinovyatkin/package-installed-version-sync#readme",
   "devDependencies": {
-    "@destinationstransfers/eslint-config": "6.4.2",
     "browser-logos": "github:alrra/browser-logos#56.2.0",
-    "eslint": "5.16.0",
-    "eslint-plugin-import": "2.18.0",
-    "eslint-plugin-node": "5.2.1",
-    "jest": "24.8.0",
-    "remark-cli": "6.0.1",
-    "remark-preset-lint-consistent": "2.0.1",
-    "remark-preset-lint-recommended": "3.0.1"
-  },
-  "remarkConfig": {
-    "presets": [
-      "lint-recommended",
-      "lint-consistent"
-    ]
+    "@destinationstransfers/eslint-plugin": "^2.5.47",
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.6.6",
+    "eslint": "^6.0.1",
+    "jest": "^24.8.0"
   },
   "jest": {
     "collectCoverage": true,
     "testEnvironment": "node",
     "verbose": true,
-    "bail": true
+    "bail": true,
+    "coverageReporters": [
+      "text",
+      "json",
+      "html",
+      "cobertura"
+    ]
   },
   "eslintConfig": {
     "plugins": [
-      "node"
+      "@destinationstransfers"
     ],
     "extends": [
-      "@destinationstransfers",
-      "plugin:node/recommended"
+      "plugin:@destinationstransfers/recommended"
     ],
     "env": {
       "node": true
     },
     "parserOptions": {
       "sourceType": "script"
-    },
-    "rules": {
-      "prefer-object-spread/prefer-object-spread": "off",
-      "prettier/prettier": [
-        "error",
-        {
-          "singleQuote": true,
-          "trailingComma": "es5"
-        }
-      ]
     }
   },
   "dependencies": {
-    "@yarnpkg/lockfile": "^1.0.0",
-    "semver": "^6.0.0"
+    "@yarnpkg/lockfile": "^1.1.0",
+    "semver": "^6.2.0"
   }
 }

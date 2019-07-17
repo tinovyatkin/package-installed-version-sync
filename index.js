@@ -5,6 +5,7 @@
 const { execFileSync } = require('child_process');
 const { existsSync, statSync, readFileSync } = require('fs');
 const path = require('path');
+
 const yarnLockfile = require('@yarnpkg/lockfile');
 const { valid } = require('semver');
 
@@ -21,9 +22,9 @@ function searchFileSync(dirToStart, fileToSearch) {
       if (existsSync(filePath)) return filePath;
       curDir = path.resolve(curDir, '..');
     } while (curDir.length > 1 && statSync(curDir).isDirectory() && ++deep < 6);
-  } catch (e) {
+  } catch (err) {
     // console.error(e);
-  } // eslint-disable-line no-empty
+  }
   return undefined;
 }
 
@@ -53,19 +54,20 @@ function readAndParseYarnLock(yarnLockFilepath) {
         },
         */
         for (const [key, { version }] of Object.entries(
-          parsedYarnLock.object
+          parsedYarnLock.object,
         )) {
           const [, packageName] = /^(\S+)@[^@]+$/.exec(key);
+          // eslint-disable-next-line max-depth
           if (valid(version)) cache.set(packageName, version);
         }
       }
     }
-  } catch (e) {} // eslint-disable-line no-empty
+  } catch (err) {} // eslint-disable-line no-empty
 }
 
 function readAndParsePackageLock(filepath) {
   // console.info('Parsing package-lock.json');
-  const { dependencies } = require(filepath); // eslint-disable-line global-require, import/no-dynamic-require
+  const { dependencies } = require(filepath);
   /*
       "@destinationstransfers/eslint-config": {
       "version": "1.0.2",
@@ -106,7 +108,7 @@ function searchLockfiles() {
 
 /**
  * Returns currently installed version of a package
- * 
+ *
  * @param {string} packageName - NPM package name, like 'eslint'
  * @returns {string}
  * @throws on unknown package
@@ -130,15 +132,17 @@ function getPackageInstalledVersion(packageName) {
       timeout: 40000,
     });
 
-    const { dependencies: { [packageName]: { version } } } = JSON.parse(
-      execRes
-    );
+    const {
+      dependencies: {
+        [packageName]: { version },
+      },
+    } = JSON.parse(execRes);
     if (version) cache.set(packageName, version);
     return version;
   } catch (err) {
     // console.error(err);
     throw new ReferenceError(
-      `Unable to get installed version of "${packageName}"`
+      `Unable to get installed version of "${packageName}"`,
     );
   }
 }
