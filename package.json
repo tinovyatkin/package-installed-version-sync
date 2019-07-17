@@ -32,11 +32,11 @@
   "homepage": "https://github.com/tinovyatkin/package-installed-version-sync#readme",
   "devDependencies": {
     "browser-logos": "github:alrra/browser-logos#56.2.0",
-    "@destinationstransfers/eslint-plugin": "^2.5.47",
-    "@types/jest": "^24.0.15",
-    "@types/node": "^12.6.6",
-    "eslint": "^6.0.1",
-    "jest": "^24.8.0"
+    "@destinationstransfers/eslint-plugin": "2.5.47",
+    "@types/jest": "24.0.15",
+    "@types/node": "12.6.6",
+    "eslint": "6.0.1",
+    "jest": "24.8.0"
   },
   "jest": {
     "collectCoverage": true,
