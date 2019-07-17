@@ -1,32 +1,15 @@
 'use strict';
 
-/* eslint-disable no-sync */
-
 const { execFileSync } = require('child_process');
-const { existsSync, statSync, readFileSync } = require('fs');
+const { readFileSync } = require('fs');
 const path = require('path');
 
 const yarnLockfile = require('@yarnpkg/lockfile');
-const { valid } = require('semver');
+const { valid, clean } = require('semver');
+const findUp = require('find-up');
 
 const cache = new Map();
 let checkedLockfiles = false;
-
-function searchFileSync(dirToStart, fileToSearch) {
-  try {
-    let curDir = dirToStart;
-    let deep = 0;
-    do {
-      // console.log(curDir);
-      const filePath = path.join(curDir, fileToSearch);
-      if (existsSync(filePath)) return filePath;
-      curDir = path.resolve(curDir, '..');
-    } while (curDir.length > 1 && statSync(curDir).isDirectory() && ++deep < 6);
-  } catch (err) {
-    // console.error(e);
-  }
-  return undefined;
-}
 
 function readAndParseYarnLock(yarnLockFilepath) {
   // console.info('Parsing yarn.lock');
@@ -80,22 +63,31 @@ function readAndParsePackageLock(filepath) {
         "prettier": "1.7.4"
       }
     },
+    "browser-logos": {
+      "version": "github:alrra/browser-logos#95dbf80b1be5c7e70b2df97f84c711e3949ebdd1",
+      "from": "github:alrra/browser-logos#56.2.0",
+      "dev": true
+    },
   */
-  for (const [packageName, { version }] of Object.entries(dependencies)) {
+  for (const [packageName, { version, from }] of Object.entries(dependencies)) {
     if (valid(version)) cache.set(packageName, version);
+    // special github case
+    else if (from) {
+      const [, savedVersion] = /#([\d.]+)$/.exec(from);
+      const ver = clean(savedVersion);
+      if (valid(ver)) cache.set(packageName, ver);
+    }
   }
 }
 
 function searchLockfiles() {
   try {
     checkedLockfiles = true;
-    const yl = searchFileSync(__dirname, 'yarn.lock');
-    if (yl) readAndParseYarnLock(yl);
-    else {
-      // let's check packages-lock.json
-      const pl = searchFileSync(__dirname, 'package-lock.json');
-      if (pl) readAndParsePackageLock(pl);
-    }
+    const lockFile = findUp.sync(['yarn.lock', 'package-lock.json']);
+    if (!lockFile) return;
+
+    if (lockFile.endsWith('yarn.lock')) readAndParseYarnLock(lockFile);
+    else readAndParsePackageLock(lockFile);
   } catch (err) {
     console.error(err);
   }
@@ -143,4 +135,3 @@ function getPackageInstalledVersion(packageName) {
 }
 
 module.exports = getPackageInstalledVersion;
-module.exports.searchFileSync = searchFileSync;
