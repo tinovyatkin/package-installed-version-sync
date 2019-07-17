@@ -33,11 +33,10 @@ function readAndParseYarnLock(yarnLockFilepath) {
   try {
     const file = readFileSync(yarnLockFilepath, 'utf8');
     const parsedYarnLock = yarnLockfile.parse(file);
-    if (parsedYarnLock) {
-      if (parsedYarnLock.type === 'success') {
-        // we have successfully parsed yarn.lock
-        // so we will just add everything from it to cache
-        /* properties looks like:
+    if (parsedYarnLock && parsedYarnLock.type === 'success') {
+      // we have successfully parsed yarn.lock
+      // so we will just add everything from it to cache
+      /* properties looks like:
         "@destinationstransfers/eslint-config@^1.0.2": {
           "version": "1.0.2",
           "resolved": "https://registry.yarnpkg.com/@destinationstransfers/eslint-config/-/eslint-config-1.0.2.tgz#b130b2406b3f95103efaf474a594748d64485346",
@@ -53,13 +52,9 @@ function readAndParseYarnLock(yarnLockFilepath) {
           }
         },
         */
-        for (const [key, { version }] of Object.entries(
-          parsedYarnLock.object,
-        )) {
-          const [, packageName] = /^(\S+)@[^@]+$/.exec(key);
-          // eslint-disable-next-line max-depth
-          if (valid(version)) cache.set(packageName, version);
-        }
+      for (const [key, { version }] of Object.entries(parsedYarnLock.object)) {
+        const [, packageName] = /^(\S+)@[^@]+$/.exec(key);
+        if (valid(version)) cache.set(packageName, version);
       }
     }
   } catch (err) {} // eslint-disable-line no-empty

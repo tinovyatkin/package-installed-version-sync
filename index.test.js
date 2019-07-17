@@ -35,6 +35,6 @@ describe('Getting package installed version', () => {
   });
 
   it('Github installed package', () => {
-    expect(getPackageInstalledVersionSync('browser-logos')).toBe('43.1.0');
+    expect(getPackageInstalledVersionSync('browser-logos')).toBe('56.2.0');
   });
 });
