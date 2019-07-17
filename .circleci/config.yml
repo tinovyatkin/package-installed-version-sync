@@ -31,6 +31,10 @@ jobs:
 
       - run: bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json -n Yarn -F Yarn
 
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+
   deploy:
     docker:
       - image: circleci/node:latest
