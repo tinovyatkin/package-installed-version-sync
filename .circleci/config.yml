@@ -6,14 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/node:latest
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
     working_directory: ~/repo
 
     steps:
@@ -38,5 +31,29 @@ jobs:
 
       - run: bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json -n Yarn -F Yarn
 
+deploy:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish
 
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - build
 
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
