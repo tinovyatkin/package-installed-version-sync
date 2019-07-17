@@ -1,4 +1,10 @@
 language: node_js
-node_js:
-- stable
-- 8
+node_js: stable
+
+install: npm ci
+
+script:
+  - npm test
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -f coverage/coverage-final.json -n NPM -F NPM
