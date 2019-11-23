@@ -34,7 +34,7 @@
     "browser-logos": "github:alrra/browser-logos#56.2.0",
     "@destinationstransfers/eslint-plugin": "2.9.52",
     "@types/jest": "24.0.23",
-    "@types/node": "12.12.11",
+    "@types/node": "12.12.12",
     "eslint": "6.7.0",
     "jest": "25.0.0"
   },
