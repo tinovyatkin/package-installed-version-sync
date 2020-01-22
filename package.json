@@ -1,6 +1,6 @@
 {
   "name": "package-installed-version-sync",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Synchronously returns installed version of a dependency package",
   "main": "index.js",
   "scripts": {
@@ -67,6 +67,6 @@
   "dependencies": {
     "@yarnpkg/lockfile": "^1.1.0",
     "find-up": "4.1.0",
-    "semver": "^6.2.0"
+    "semver": "^7.0.0"
   }
 }
