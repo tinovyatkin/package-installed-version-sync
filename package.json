@@ -35,7 +35,7 @@
     "@destinationstransfers/eslint-plugin": "2.9.148",
     "@types/jest": "24.9.1",
     "@types/node": "12.12.40",
-    "eslint": "6.8.0",
+    "eslint": "7.0.0",
     "jest": "25.5.4"
   },
   "jest": {
