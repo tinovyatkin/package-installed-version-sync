@@ -33,7 +33,7 @@
   "devDependencies": {
     "browser-logos": "github:alrra/browser-logos#56.2.0",
     "@destinationstransfers/eslint-plugin": "2.9.158",
-    "@types/jest": "24.9.1",
+    "@types/jest": "25.2.3",
     "@types/node": "12.12.43",
     "eslint": "7.1.0",
     "jest": "25.5.4"
