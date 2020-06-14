@@ -1,7 +1,5 @@
 'use strict';
 
-const path = require('path');
-
 const { getVersion } = require('jest');
 
 const getPackageInstalledVersionSync = require('./');

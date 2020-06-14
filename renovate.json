@@ -4,7 +4,8 @@
     ":pinSkipCi",
     "default:pinDigestsDisabled",
     "config:base",
-    ":automergeMinor"
+    ":automergeMinor",
+    ":disableDigestUpdates"
   ],
   "baseBranch": "master",
   "respectLatest": false,

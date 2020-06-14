@@ -40,7 +40,7 @@ function readAndParseYarnLock(yarnLockFilepath) {
         if (valid(version)) cache.set(packageName, version);
       }
     }
-  } catch (err) {} // eslint-disable-line no-empty
+  } catch {}
 }
 
 function readAndParsePackageLock(filepath) {
@@ -88,9 +88,7 @@ function searchLockfiles() {
 
     if (lockFile.endsWith('yarn.lock')) readAndParseYarnLock(lockFile);
     else readAndParsePackageLock(lockFile);
-  } catch (err) {
-    console.error(err);
-  }
+  } catch {}
 }
 
 /**
@@ -127,7 +125,6 @@ function getPackageInstalledVersion(packageName) {
     if (version) cache.set(packageName, version);
     return version;
   } catch (err) {
-    // console.error(err);
     throw new ReferenceError(
       `Unable to get installed version of "${packageName}"`,
     );
