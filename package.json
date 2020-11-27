@@ -38,7 +38,7 @@
     "@types/node": "14.0.13",
     "browser-logos": "github:alrra/browser-logos#63.0.0",
     "eslint": "7.6.0",
-    "jest": "26.0.1"
+    "jest": "26.6.3"
   },
   "jest": {
     "collectCoverage": true,
