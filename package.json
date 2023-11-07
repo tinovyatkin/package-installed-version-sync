@@ -35,7 +35,7 @@
   "devDependencies": {
     "@destinationstransfers/eslint-plugin": "2.9.163",
     "@types/jest": "26.0.0",
-    "@types/node": "14.0.13",
+    "@types/node": "20.9.0",
     "browser-logos": "github:alrra/browser-logos#63.0.0",
     "eslint": "7.6.0",
     "jest": "26.0.1"
